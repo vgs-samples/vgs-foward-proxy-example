@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  vgs-card-example-asp-net:
+    image: ${DOCKER_REGISTRY-}vgscardexampleaspnet
+    build:
+      context: .
+      dockerfile: vgs-card-example-asp-net/Dockerfile

@@ -1,0 +1,50 @@
+﻿@page
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+<body>
+
+<form action="/" id="reveal">
+Card_cvc: <input type="text" id="Card_cvc" name="Card_cvc" placeholder="enter cvc alias" style="width:50%;height:15px"><br>
+Card_number: <input type="text" id="Card_number" name="Card_number" placeholder="enter card alias" style="width:50%;height:15px"><br>
+<input type="submit" value="Submit">
+</form><br>
+<div id="result"></div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $("#reveal").submit(function(e){
+        e.preventDefault();
+        var aliasData = $('#reveal').serializeArray().reduce(function(acc, curr){
+            acc[curr.name] = curr.value;
+            return acc;
+        }, {});
+
+        console.log(aliasData);
+        $.ajax({
+            type: "post",
+            url: "/post",
+            data: JSON.stringify(aliasData),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){
+                $('#result').empty();
+                $('#result').html(JSON.stringify(data));
+            },
+            failure: function(errMsg) {
+                alert(errMsg);
+            }
+        });
+    });
+</script>
+</body>
+</html>

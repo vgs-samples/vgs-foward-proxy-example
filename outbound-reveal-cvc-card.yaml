@@ -1,0 +1,97 @@
+data:
+ -
+  attributes:
+   created_at: '2019-11-07T00:25:35'
+   destination_override_endpoint: '*'
+   entries:
+    -
+     id: e30004b5-65fb-48a9-946e-5b227715ae73
+     phase: RESPONSE
+     operation: ENRICH
+     token_manager: PERSISTENT
+     public_token_generator: UUID
+     transformer: REGEX
+     transformer_config:
+      - '(tok_[a-z]+_[0-9a-zA-Z]{20,22})'
+     transformer_config_map:
+      patterns:
+       - '(tok_[a-z]+_[0-9a-zA-Z]{20,22})'
+     operations: null
+     targets:
+      - body
+     id_selector: null
+     classifiers: {}
+     config:
+      condition: AND
+      rules:
+       -
+        condition: null
+        rules: null
+        expression:
+         field: PathInfo
+         type: string
+         operator: matches
+         values: [/post]
+       -
+        condition: null
+        rules: null
+        expression:
+         field: ContentType
+         type: string
+         operator: equals
+         values: [application/json]
+      expression: null
+    -
+     id: 5b392f41-b81d-4b9c-8bac-5b56ef403e80
+     phase: RESPONSE
+     operation: ENRICH
+     token_manager: VOLATILE
+     public_token_generator: UUID
+     transformer: REGEX
+     transformer_config:
+      - '(tok_[a-z]+_[0-9a-zA-Z]{20,22})'
+     transformer_config_map:
+      patterns:
+       - '(tok_[a-z]+_[0-9a-zA-Z]{20,22})'
+     operations: null
+     targets:
+      - body
+     id_selector: null
+     classifiers: {}
+     config:
+      rules:
+       -
+        operator: matches
+        type: string
+        value: /post
+        field: PathInfo
+        condition: null
+        expression:
+         field: PathInfo
+         type: string
+         operator: matches
+         values: [/post]
+       -
+        operator: equals
+        type: string
+        value: application/json
+        field: ContentType
+        condition: null
+        expression:
+         field: ContentType
+         type: string
+         operator: equals
+         values: [application/json]
+      condition: AND
+   host_endpoint: echo\.apps\.verygood\.systems
+   id: bb176919-c848-4c4a-a70e-ca596e4f54e3
+   ordinal: null
+   port: 80
+   protocol: http
+   source_endpoint: '*'
+   tags:
+    name: outbound-reveal-cvc-card
+   updated_at: '2019-11-09T11:52:34'
+  id: bb176919-c848-4c4a-a70e-ca596e4f54e3
+  type: rule_chain
+version: 1
